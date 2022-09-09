@@ -1,38 +1,211 @@
+*,
+::after,
+::before {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 .App {
-  text-align: center;
+  display: flex;
+
+  position: relative;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
+main {
+  width: 100%;
   min-height: 100vh;
+  position: relative;
+}
+
+.reduce-sidebar {
+  display: none;
+}
+
+aside {
+  max-width: 260px;
+  min-width: 260px;
+  min-height: 100vh;
+  max-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+  background-color: rgb(21, 21, 21);
+  transition: 500ms ease-out;
+  position: relative; 
+}
+
+
+aside button {
+  margin-top: 20px;
+  background-color: rgb(92, 209, 110);
   color: white;
+  border: none;
+  padding: 10px 10px;
+  border-radius: 3px;
+  width: 90%;
+  font-weight: 600;
 }
 
-.App-link {
-  color: #61dafb;
+form {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  min-height: 100vh;
+  position: relative;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+form label {
+  font-size: 1.5em;
+  transform: translateY(120%);
+  opacity: 0;
+  transition: 300ms;
+  width: 90%;
+  height: 50px;
+  font-family: Georgia, "Times New Roman", Times, serif;
+  margin: 0;
+}
+
+.label-active {
+  transform: translateY(0%);
+  opacity: 1;
+}
+
+.label-title {
+  font-weight: 800;
+}
+
+form input,
+form textarea {
+  border: none;
+  outline: none;
+  width: 90%;
+  resize: none;
+  font-family: Georgia, "Times New Roman", Times, serif;
+
+}
+
+form input {
+  height: 50px;
+  font-size: 1.5em;
+  font-weight: 800;
+  margin-bottom: 50px;
+}
+
+form textarea {
+  font-size: 1.5em;
+  min-height: 400px
+}
+
+form input::placeholder,
+form textarea::placeholder {
+  color: black;
+}
+
+form button {
+  position: absolute;
+  bottom:20px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 90%;
+  margin: auto;
+  height: 40px;
+  background-color: rgb(24, 24, 224);
+  border-radius: 6px;
+  border: none;
+  color: white;
+  font-weight: 600;
+}
+
+.notes-list {
+  width: 100%;
+  padding: 0;
+  margin-top: 20px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow-y: auto;
+  overflow-x: visible;
+  scrollbar-color: black;
+}
+
+
+
+.mininote {
+  background-color: white;
+  width: 90%;
+  margin: 10px 0px;
+  padding: 10px 10px;
+  border-radius: 3px;
+  position: relative;
+  height: 100px;
+  min-height: 100px;
+  cursor: pointer;
+}
+
+.mininote-title {
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+.mininote-date {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  font-weight: 300;
+  margin-top: 5px;
+  font-size: 0.7em;
+  color: rgb(23, 22, 22);
+  text-align: right;
+  z-index: 1;
+}
+
+.mininote-delete {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  transition: 300ms;
+  height: 20px;
+  width: 20px;
+  text-align: center;
+  cursor: pointer;
+  border-radius: 3px;
+}
+
+.mininote-delete:hover {
+  background-color: rgb(218, 218, 218);
+}
+
+@media (max-width: 768px) {
+  aside {
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 1;
   }
-  to {
-    transform: rotate(360deg);
+  .aside-mask {
+    transform: translateX(-100%);
+    flex: 0;
+  }
+  .reduce-sidebar {
+    position: absolute;
+    top: 0px;
+    right: -40px;
+    font-size: 1.5em;
+    cursor: pointer;
+    display: block;
+    transition: 300ms ease-out;
+    
+  }
+  .reduce-sidebar-turn {
+    transform: rotate(-180deg);
+  }
+  form textarea {
+      min-height: 200px
+  }
+  form {
+    margin-top: 30px;
   }
 }
