@@ -1,0 +1,17 @@
+@mixin inset ($padding){
+  box-shadow: rgba(163, 177, 198, 0.5) 5px 5px 10px 0px inset,
+    rgb(255, 255, 255) -5px -5px 10px 0px inset;
+  -webkit-box-shadow: rgba(163, 177, 198, 0.5) 5px 5px 10px 0px inset,
+    rgb(255, 255, 255) -5px -5px 10px 0px inset;
+    border-radius: 14px;
+    padding: $padding;
+}
+
+@mixin drop ($padding) {
+  box-shadow: rgba(163, 177, 198, 0.5) 5px 5px 10px 0px,
+    rgb(255, 255, 255) -5px -5px 10px 0px;
+  -webkit-box-shadow: rgba(163, 177, 198, 0.5) 5px 5px 10px 0px,
+    rgb(255, 255, 255) -5px -5px 10px 0px;
+    border-radius: 14px;
+    padding: $padding;
+}

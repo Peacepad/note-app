@@ -1,7 +1,8 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import "./App.css";
 import Sidebar from "./Components/Sidebar.js";
 import { v4 as uuidv4 } from "uuid";
+import { gsap, Power2 } from "gsap";
 
 function App() {
   const [titleInput, setTitleInput] = useState();
@@ -11,6 +12,36 @@ function App() {
   const [notesArr, setNotesArr] = useState([]);
   const [noteEditing, setNoteEditing] = useState("");
   const [isMask, setIsMask] = useState(false);
+  const [isTitleActive, setIsTitleActive] = useState(false);
+  const [isTextActive, setIsTextActive] = useState(false);
+
+  const inputRef = useRef(null);
+
+  const clickTitle = (e) => {
+    e.preventDefault();
+
+    setIsTitleActive(!isTitleActive);
+    setIsMask(false);
+    if (!isTitleActive) {
+      
+      inputRef.current.focus();
+      setIsTextActive(false);
+    } else inputRef.current.blur();
+  };
+
+
+  const textRef = useRef(null);
+
+  const clickText = (e) => {
+    e.preventDefault();
+
+    setIsTextActive(!isTextActive);
+    setIsMask(false);
+    if (!isTextActive) {
+      textRef.current.focus();
+      setIsTitleActive(false);
+    } else textRef.current.blur();
+  };
 
   const linkedTitle = (e) => {
     setTitleInput(e.target.value);
@@ -30,8 +61,6 @@ function App() {
   };
 
   const saveNewNote = () => {
-
-
     const newNote = {};
     newNote.txt = textInput;
     newNote.title = titleInput;
@@ -118,6 +147,87 @@ function App() {
     }
   };
 
+  const inputContainerRef = useRef(null);
+  const textContainerRef = useRef(null);
+
+  useEffect(() => {
+    if (isTitleActive) {
+      gsap.to(inputContainerRef.current, {
+        boxShadow: "none",
+        opacity: 0.5,
+        duration: 0.1,
+        ease: Power2.easeOut,
+      });
+      const timeAnimation = setTimeout(() => {
+        gsap.to(inputContainerRef.current, {
+          boxShadow:
+            "rgba(163, 177, 198, 0.5) 5px 5px 10px 0px inset, rgb(255, 255, 255) -5px -5px 10px 0px inset",
+          opacity: 1,
+          duration: 0.1,
+          ease: Power2.easeOut,
+        });
+      }, 200);
+
+      return () => clearTimeout(timeAnimation);
+    } else {
+      gsap.to(inputContainerRef.current, {
+        boxShadow: "none",
+        opacity: 0.5,
+        duration: 0.1,
+        ease: Power2.easeOut,
+      });
+
+      const timeAnimation = setTimeout(() => {
+        gsap.to(inputContainerRef.current, {
+          boxShadow:
+            "rgba(163, 177, 198, 0.5) 5px 5px 10px 0px,rgb(255, 255, 255) -5px -5px 10px 0px",
+          opacity: 1,
+          duration: 0.1,
+        });
+      }, 200);
+      return () => clearTimeout(timeAnimation);
+    }
+  }, [isTitleActive]);
+
+  useEffect(() => {
+    if (isTextActive) {
+      gsap.to(textContainerRef.current, {
+        boxShadow: "none",
+        opacity: 0.5,
+        duration: 0.1,
+        ease: Power2.easeOut,
+      });
+      const timeAnimation = setTimeout(() => {
+        gsap.to(textContainerRef.current, {
+          boxShadow:
+            "rgba(163, 177, 198, 0.5) 5px 5px 10px 0px inset, rgb(255, 255, 255) -5px -5px 10px 0px inset",
+          opacity: 1,
+          duration: 0.1,
+          ease: Power2.easeOut,
+        });
+      }, 200);
+
+      return () => clearTimeout(timeAnimation);
+    } else {
+      gsap.to(textContainerRef.current, {
+        boxShadow: "none",
+        opacity: 0.5,
+        duration: 0.1,
+        ease: Power2.easeOut,
+      });
+
+      const timeAnimation = setTimeout(() => {
+        gsap.to(textContainerRef.current, {
+          boxShadow:
+            "rgba(163, 177, 198, 0.5) 5px 5px 10px 0px,rgb(255, 255, 255) -5px -5px 10px 0px",
+          opacity: 1,
+          duration: 0.1,
+        });
+      }, 200);
+      return () => clearTimeout(timeAnimation);
+    }
+  }, [isTextActive]);
+
   return (
     <div className="App">
       <Sidebar
@@ -129,38 +239,51 @@ function App() {
         maskFunc={maskSidebar}
         deleteFunc={deleteNote}
       />
-      <main>
-        <form>
-          <label
-            htmlFor="title-input"
-            className={
-              inputIsEmpty ? "label-title" : "label-title label-active"
-            }
+      <main className="note-container">
+      <div
+        className={
+          isMask ? "reduce-sidebar reduce-sidebar-turn" : "reduce-sidebar"
+        }
+        onClick={() => {
+          maskSidebar();
+        }}
+      >
+        <div>→</div>
+      </div>
+        <form className="note-form" onSubmit={e => e.preventDefault()}>
+          <div
+            className={"input-container"}
+            ref={inputContainerRef}
+            onClick={(e) => clickTitle(e)}
           >
-            Titre
-          </label>
-          <input
-            type="text"
-            id="title-input"
-            placeholder="Titre"
-            maxLength={38}
-            onInput={(e) => linkedTitle(e)}
-            value={titleInput || ""}
-            autoFocus
-          />
-          <label
-            htmlFor="text-input"
-            className={textareaIsEmpty ? "" : "label-active"}
+            <label htmlFor="title-input" className="label-title">
+              Titre
+            </label>
+            <input
+              type="text"
+              id="title-input"
+              maxLength={38}
+              onInput={(e) => linkedTitle(e)}
+              value={titleInput || ""}
+              ref={inputRef}
+            />
+          </div>
+
+          <div
+            className={"input-container input-container-text"}
+            ref={textContainerRef}
+            onClick={(e) => clickText(e)}
           >
-            Message
-          </label>
-          <textarea
-            id="text-input"
-            placeholder="Message"
-            onInput={(e) => linkedText(e)}
-            value={textInput || ""}
-          />
-          
+            <label htmlFor="text-input" className="label-text">
+              Message
+            </label>
+            <textarea
+              id="text-input"
+              onInput={(e) => linkedText(e)}
+              value={textInput || ""}
+              ref={textRef}
+            />
+          </div>
         </form>
       </main>
     </div>

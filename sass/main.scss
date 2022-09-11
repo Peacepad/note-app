@@ -1,0 +1,10 @@
+@import "./utils/neumorphism";
+@import "./components/note";
+@import "./components/sidebar";
+
+
+*, ::before, ::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}

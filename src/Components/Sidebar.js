@@ -1,4 +1,4 @@
-import React, { useEffect, useReducer } from "react";
+import React, { useEffect } from "react";
 import Mininote from "./Mininote";
 import { useState, useRef } from "react";
 
@@ -19,23 +19,11 @@ const Sidebar = (props) => {
 
   useEffect(() => convertMiniNotes(props), [props.allNotes]);
 
-  const masked = props.mask ? "aside-mask" : "";
-
+  const masked = props.mask ? "" : "sidebar-mask";
 
   return (
-    <aside className={`${masked}`}>
-      <div
-        className={
-          props.mask ? "reduce-sidebar reduce-sidebar-turn" : "reduce-sidebar"
-        }
-        onClick={() => {
-          props.maskFunc();
-        }}
-      >
-        ←
-      </div>
-
-      <button onClick={() => props.newFunc()}>Nouvelle Note</button>
+    <aside className={`sidebar ${masked}`}>
+      <button onClick={() => {props.newFunc(); props.maskFunc()}}>Nouvelle Note</button>
       <ul className="notes-list">
         {miniNotes &&
           miniNotes.map((miniNote) => {

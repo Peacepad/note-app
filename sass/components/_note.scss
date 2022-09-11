@@ -1,0 +1,110 @@
+.note-container {
+  width: 100vw;
+  max-width: 100vw;
+  height: 100vh;
+  padding: 10px;
+  position: relative;
+  background-color: rgb(236, 237, 241);
+  overflow: hidden;
+}
+
+.note-form {
+  margin-top: 70px;
+  display: flex;
+  flex-direction: column;
+  height: calc(90%);
+  width: 100%;
+  position: relative;
+  @include inset(40px);
+  @media (max-width: 768px) {
+    @include inset(10px);
+  }
+}
+
+.input-container {
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  margin: 20px;
+  cursor: pointer;
+  @include drop(20px);
+  transition: 700ms;
+  animation-fill-mode: forwards;
+}
+
+.input-container-text {
+  height: 80%;
+  position: relative;
+}
+
+.input-container-active {
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  margin: 20px;
+  cursor: pointer;
+  @include inset(20px);
+}
+
+.note-form input {
+  background-color: inherit;
+  border: none;
+  height: 40px;
+  outline: none;
+  font-size: 1.5em;
+  font-weight: 600;
+  font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  cursor: pointer;
+  &::placeholder {
+    color: black;
+  }
+  &:-webkit-autofill,
+  :-webkit-autofill:hover, 
+  :-webkit-autofill:focus, 
+  :-webkit-autofill:active{
+      -webkit-box-shadow: 0 0 0 30px rgb(236, 237, 241) inset !important;
+  }
+}
+
+.label-title,
+.label-text {
+  font-size: 1.5em;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+form textarea {
+  border: none;
+  outline: none;
+  height: 90%;
+  font-size: 1.3em;
+  background-color: inherit;
+  cursor: pointer;
+  resize: none;
+  font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+@keyframes shadowDeepIn {
+  0% {
+    box-shadow: rgba(163, 177, 198, 0.5) 5px 5px 10px 0px inset,
+      rgb(255, 255, 255) -5px -5px 10px 0px inset;
+    -webkit-box-shadow: rgba(163, 177, 198, 0.5) 5px 5px 10px 0px inset,
+      rgb(255, 255, 255) -5px -5px 10px 0px inset;
+    border-radius: 14px;
+    padding: 20px;
+    opacity: 1;
+  }
+  50% {
+    box-shadow: none;
+    opacity: 0.5;
+  }
+  100% {
+    box-shadow: rgba(163, 177, 198, 0.5) 5px 5px 10px 0px,
+      rgb(255, 255, 255) -5px -5px 10px 0px;
+    -webkit-box-shadow: rgba(163, 177, 198, 0.5) 5px 5px 10px 0px,
+      rgb(255, 255, 255) -5px -5px 10px 0px;
+    border-radius: 14px;
+    padding: 20px;
+    opacity: 1;
+  }
+}
