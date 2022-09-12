@@ -12,10 +12,10 @@
   margin-top: 70px;
   display: flex;
   flex-direction: column;
-  height: calc(90%);
+  height: calc(85%);
   width: 100%;
   position: relative;
-  @include inset(40px);
+  @include inset(20px);
   @media (max-width: 768px) {
     @include inset(10px);
   }

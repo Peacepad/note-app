@@ -52,8 +52,6 @@
   }
 }
 
-
-
 .notes-list {
   width: 100%;
   position: relative;
@@ -111,6 +109,41 @@
   }
 }
 
+.search {
+  margin-top: 20px;
+  position: relative;
+  width: 90%;
+  @include inset(5px);
+  border-radius: 5px;
+  &:-webkit-autofill,
+  :-webkit-autofill:hover,
+  :-webkit-autofill:focus,
+  :-webkit-autofill:active {
+    -webkit-box-shadow: 0 0 0 30px rgb(236, 237, 241) inset !important;
+  }
+}
+
+.search img {
+  height: 15px;
+  left: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  position: absolute;
+  filter:none;
+}
+
+#search-input {
+  width: 100%;
+  background-color: inherit;
+  border: none;
+  outline: none;
+  padding-left: 25px;
+  height: 20px;
+}
+
+#search-input:active .search img {
+  filter: invert(20%) sepia(74%) saturate(7230%) hue-rotate(253deg) brightness(93%) contrast(106%);
+}
 
 @keyframes clickButton {
   0% {

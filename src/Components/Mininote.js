@@ -21,12 +21,18 @@ const Mininote = (props) => {
   };
 
   const mininoteAnim = (e) => {
-    e.target.classList.add("mininote-anim");
+     e.currentTarget.classList.add("mininote-anim");
     const mininoteTimer = setTimeout(() => {
+     
       e.target.classList.remove("mininote-anim");
-    }, 300);
-    e.preventDefault();
-    e.stopPropagation();
+
+      props.editFunc(
+        props.noteContent[1].id,
+        props.noteContent[1].title,
+        props.noteContent[1].txt
+      );
+      props.maskFunc();
+    }, 300,e);
 
     return () => {
       clearTimeout(mininoteTimer);
@@ -38,12 +44,6 @@ const Mininote = (props) => {
       id={`mininote_${props.noteContent[0]}`}
       className={"mininote"}
       onClick={(e) => {
-        props.editFunc(
-          props.noteContent[1].id,
-          props.noteContent[1].title,
-          props.noteContent[1].txt
-        );
-
         mininoteAnim(e);
       }}
     >
@@ -51,8 +51,9 @@ const Mininote = (props) => {
       <p className="mininote-txt">{minimizeTxt(props.noteContent[1].txt)}</p>
       <p className="mininote-date"> {displayDate(props.noteContent[1].date)}</p>
       <div
-        onClick={(e) => {
+        onClick={e => {
           props.deleteFunc(e, props.noteContent[1].id);
+          props.stopSearchFunc()
         }}
         className="mininote-delete"
       >

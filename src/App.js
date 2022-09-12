@@ -6,6 +6,7 @@ import { gsap, Power2 } from "gsap";
 
 function App() {
   const [titleInput, setTitleInput] = useState();
+  
   const [inputIsEmpty, setInputIsEmpty] = useState(true);
   const [textareaIsEmpty, setTextareaIsEmpty] = useState(true);
   const [textInput, setTextInput] = useState();
@@ -14,6 +15,7 @@ function App() {
   const [isMask, setIsMask] = useState(false);
   const [isTitleActive, setIsTitleActive] = useState(false);
   const [isTextActive, setIsTextActive] = useState(false);
+  
 
   const inputRef = useRef(null);
 
@@ -23,7 +25,6 @@ function App() {
     setIsTitleActive(!isTitleActive);
     setIsMask(false);
     if (!isTitleActive) {
-      
       inputRef.current.focus();
       setIsTextActive(false);
     } else inputRef.current.blur();
@@ -56,11 +57,11 @@ function App() {
     if (e.target.value !== "") {
       setTextareaIsEmpty(false);
 
-      autoBackup(e.target.value);
+      
     } else setTextareaIsEmpty(true);
   };
 
-  const saveNewNote = () => {
+  const saveNewNote =  () => {
     const newNote = {};
     newNote.txt = textInput;
     newNote.title = titleInput;
@@ -102,7 +103,11 @@ function App() {
 
   useEffect(() => checkLocalStorage(), []);
 
-  const autoBackup = () => {
+  useEffect(() => {
+    autoBackup();
+  },[textInput, titleInput])
+
+  const autoBackup =  () => {
     if (textareaIsEmpty == false && inputIsEmpty == false) saveNewNote();
   };
 
@@ -145,11 +150,14 @@ function App() {
       setTextInput(notesArr[1][1].txt);
       setNoteEditing(notesArr[1][1].id);
     }
+
+   
   };
 
   const inputContainerRef = useRef(null);
   const textContainerRef = useRef(null);
 
+  // -- Effet d'enfoncement sur les inputs container
   useEffect(() => {
     if (isTitleActive) {
       gsap.to(inputContainerRef.current, {
@@ -227,6 +235,8 @@ function App() {
       return () => clearTimeout(timeAnimation);
     }
   }, [isTextActive]);
+// -- Effet d'enfoncement sur les inputs container
+
 
   return (
     <div className="App">
