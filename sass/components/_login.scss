@@ -1,0 +1,67 @@
+.login-container, .register-container {
+  width: 100vw;
+  max-width: 100vw;
+  height: 100vh;
+  padding: 10px;
+  position: relative;
+  background-color: rgb(236, 237, 241);
+  overflow: hidden;
+}
+
+#login, #register {
+  display: flex;
+  flex-direction: column;
+  height: 89%;
+  width: 100%;
+  position: relative;
+  align-items: center;
+  @include inset(40px);
+}
+
+#login input, #register input {
+    background-color: inherit;
+    border: none;
+    height: 40px;
+    outline: none;
+    font-size: 1.2em;
+    font-weight: 600;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    cursor: pointer;
+    width: 350px;
+    &::placeholder {
+      color: black;
+    }
+    &:-webkit-autofill,
+    :-webkit-autofill:hover, 
+    :-webkit-autofill:focus, 
+    :-webkit-autofill:active{
+        -webkit-box-shadow: 0 0 0 30px rgb(236, 237, 241) inset !important;
+    }
+}
+
+#login button, #register button {
+    @include drop(15px);
+    border: none;
+    border-radius: 5px;
+    margin: 20px 0;
+    color: #4e28f3;
+    font-weight: 600;
+    width: 390px;
+    transition: 400ms ease-out;
+    cursor: pointer;
+    &:active {
+      @include inset(15px);
+    }
+}
+
+.go-register, .go-login {
+  color: #ff3a09 !important;
+}
+
+.error-msg {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  margin-top: 30px;
+  color: #ff3a09;
+}

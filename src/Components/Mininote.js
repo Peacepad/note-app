@@ -1,4 +1,3 @@
-import { useEffect, useState } from "react";
 import trash from "../icons/trash.svg";
 
 const Mininote = (props) => {

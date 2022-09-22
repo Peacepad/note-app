@@ -12,13 +12,10 @@
   margin-top: 70px;
   display: flex;
   flex-direction: column;
-  height: calc(85%);
+  height: calc(89%);
   width: 100%;
   position: relative;
-  @include inset(20px);
-  @media (max-width: 768px) {
-    @include inset(10px);
-  }
+  @include inset(10px);
 }
 
 .input-container {
@@ -53,16 +50,16 @@
   outline: none;
   font-size: 1.5em;
   font-weight: 600;
-  font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   cursor: pointer;
   &::placeholder {
     color: black;
   }
   &:-webkit-autofill,
-  :-webkit-autofill:hover, 
-  :-webkit-autofill:focus, 
-  :-webkit-autofill:active{
-      -webkit-box-shadow: 0 0 0 30px rgb(236, 237, 241) inset !important;
+  :-webkit-autofill:hover,
+  :-webkit-autofill:focus,
+  :-webkit-autofill:active {
+    -webkit-box-shadow: 0 0 0 30px rgb(236, 237, 241) inset !important;
   }
 }
 
@@ -81,7 +78,7 @@ form textarea {
   background-color: inherit;
   cursor: pointer;
   resize: none;
-  font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 
 @keyframes shadowDeepIn {
@@ -108,3 +105,32 @@ form textarea {
     opacity: 1;
   }
 }
+
+.buttons-cloud {
+  position: absolute;
+  right: 10px;
+  display: flex;
+}
+.download-note, .upload-note {
+  display: flex;
+  align-items: center;
+  @include drop(10px);
+  transition: 400ms ease-out;
+  cursor: pointer;
+  border-radius: 5px;
+  margin-left: 10px;
+  border: none;
+
+  height: 49px;
+  & img {
+    filter: invert(20%) sepia(74%) saturate(7230%) hue-rotate(253deg)
+      brightness(93%) contrast(106%);
+    height: 100%;
+    width: 100%;
+    margin-left: 5px;
+  }
+  &:active {
+    @include inset(10px);
+  }
+}
+

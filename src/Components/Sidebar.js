@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import Mininote from "./Mininote";
-import { useState, useRef } from "react";
+import { useState } from "react";
 import searchIcon from "../icons/search.svg";
 
 const Sidebar = (props) => {
@@ -67,6 +67,8 @@ const Sidebar = (props) => {
       >
         Nouvelle Note
       </button>
+
+      
 
       <div className="search">
         <img src={searchIcon} />

@@ -29,6 +29,8 @@
   }
 }
 
+
+
 .reduce-sidebar-turn {
   transform: translateX(300px);
   @include inset(15px);
@@ -42,15 +44,17 @@
   @include drop(15px);
   border: none;
   border-radius: 5px;
-
   color: #4e28f3;
   font-weight: 600;
   width: 90%;
+  margin: 10px 0;
   &:active {
     animation: clickButton 200ms ease-out forwards;
     animation: clickButton 200ms 100ms ease-out reverse forwards;
   }
 }
+
+
 
 .notes-list {
   width: 100%;
